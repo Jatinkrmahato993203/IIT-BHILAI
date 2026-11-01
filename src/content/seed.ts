@@ -7,10 +7,10 @@ import type { AppId } from '../shell/appIds';
  * All text is original fiction written for this project.
  */
 /**
- * v2 adds my_daily_routine_1995.txt; v3 adds My Documents\meme. Bumping makes existing
+ * v2 adds my_daily_routine_1995.txt; v3 adds My Documents\meme; v4 adds the empty My Documents\Hot-Pics. Bumping makes existing
  * browsers receive new seed files additively (user edits are never overwritten).
  */
-export const SEED_VERSION = 3;
+export const SEED_VERSION = 4;
 
 export const SEED_IDS = {
   root: ROOT_ID,
@@ -32,6 +32,7 @@ export const SEED_IDS = {
   shopping: 'seed:shopping',
   diary1995: 'seed:diary-1995',
   meme: 'seed:meme',
+  hotPics: 'seed:hot-pics',
   memeGandhi: 'seed:meme-gandhi',
   syslog: 'seed:syslog',
   winini: 'seed:winini',
@@ -422,6 +423,7 @@ const SPECS: SeedSpec[] = [
   { id: SEED_IDS.checklist, parentId: SEED_IDS.docs, name: 'y2k_checklist.txt', kind: 'file', text: CHECKLIST, createdAt: '1999-12-31T21:47:00', readOnly: true },
   { id: SEED_IDS.school, parentId: SEED_IDS.docs, name: 'school_project.txt', kind: 'file', text: SCHOOL, createdAt: '1999-11-14T20:12:00' },
   { id: SEED_IDS.journal, parentId: SEED_IDS.docs, name: 'journal.txt', kind: 'file', text: JOURNAL, createdAt: '1999-12-31T23:58:00' },
+  { id: SEED_IDS.hotPics, parentId: SEED_IDS.docs, name: 'Hot-Pics', kind: 'folder', createdAt: '1999-10-02T22:47:00' },
   { id: SEED_IDS.meme, parentId: SEED_IDS.docs, name: 'meme', kind: 'folder', createdAt: '1999-11-20T19:15:00' },
   { id: SEED_IDS.memeGandhi, parentId: SEED_IDS.meme, name: 'satyagraha_vs_56k.jpg', kind: 'file', mimeType: 'image/jpeg', assetId: 'meme-gandhi', createdAt: '1999-11-20T19:16:00' },
   { id: SEED_IDS.diary1995, parentId: SEED_IDS.docs, name: 'my_daily_routine_1995.txt', kind: 'file', text: DIARY_1995, createdAt: '1998-08-15T20:30:00' },

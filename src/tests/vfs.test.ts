@@ -49,8 +49,12 @@ describe('VfsService', () => {
   it('lists children with folders first and hides hidden/deleted nodes', () => {
     const names = vfs.listChildren(ROOT_ID).map((n) => n.name);
     expect(names).toEqual(['My Documents', 'My Pictures', 'Program Files', 'Windows']);
-    const docs = vfs.listChildren(SEED_IDS.docs).map((n) => n.name);
-    expect(docs[0]).toBe('letters');
+    const docNodes = vfs.listChildren(SEED_IDS.docs);
+    const docs = docNodes.map((n) => n.name);
+    const firstFile = docNodes.findIndex((n) => n.kind === 'file');
+    expect(docNodes.slice(0, firstFile).every((n) => n.kind === 'folder')).toBe(true);
+    expect(docNodes.slice(firstFile).every((n) => n.kind === 'file')).toBe(true);
+    expect(docs).toContain('letters');
     expect(docs).not.toContain('final_final_REAL_FINAL.txt');
   });
 
@@ -249,5 +253,14 @@ describe('seed v3: meme folder', () => {
     const r = vfs.readText(SEED_IDS.memeGandhi);
     expect(r.ok).toBe(false);
     expect(vfs.getNode(SEED_IDS.memeGandhi)?.mimeType).toBe('image/jpeg');
+  });
+});
+
+describe('seed v4: Hot-Pics folder', () => {
+  it('exists in My Documents and is empty', async () => {
+    const { vfs } = await makeVfs();
+    expect(vfs.resolvePath('C:\\My Documents\\Hot-Pics')).toEqual({ ok: true, value: SEED_IDS.hotPics });
+    expect(vfs.getNode(SEED_IDS.hotPics)?.kind).toBe('folder');
+    expect(vfs.listChildren(SEED_IDS.hotPics)).toEqual([]);
   });
 });
