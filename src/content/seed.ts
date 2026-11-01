@@ -6,7 +6,8 @@ import type { AppId } from '../shell/appIds';
  * Canon: owner Aarav, files dated Aug 1998 – 31 Dec 1999 23:58. Nothing is dated 2000 or later.
  * All text is original fiction written for this project.
  */
-export const SEED_VERSION = 1;
+/** v2 adds my_daily_routine_1995.txt. Bumping makes existing browsers receive it additively. */
+export const SEED_VERSION = 2;
 
 export const SEED_IDS = {
   root: ROOT_ID,
@@ -26,6 +27,7 @@ export const SEED_IDS = {
   journal: 'seed:journal',
   grandma: 'seed:grandma',
   shopping: 'seed:shopping',
+  diary1995: 'seed:diary-1995',
   syslog: 'seed:syslog',
   winini: 'seed:winini',
   finalFinal: 'seed:final-final',
@@ -163,6 +165,109 @@ From,
 Aarav (the one with the floppy)
 
 P.S. Pizza.
+`;
+
+const DIARY_1995 = `MY SECRET DIARY
+YEAR: 1995
+AGE: 15
+
+---
+
+## DAY 1 - MONDAY
+
+Dear Diary,
+
+Woke up at 6 AM. I don't understand why school starts so early. Even criminals get more sleep than students.
+
+Mom shouted at me for sleeping again. Dad reminded me that I am wasting my life. It's only Monday, and apparently my life is already a disappointment.
+
+Got 12/50 in Mathematics. Teacher said I have a bright future. I think she was being sarcastic.
+
+At least Rahul shared his lunch with me. Friendship is the only thing keeping me alive in this education system.
+
+Goodnight. Hopefully, tomorrow won't be another disaster.
+
+---
+
+## DAY 2 - TUESDAY
+
+Dear Diary,
+
+Today I saw Priya smiling at me. For exactly three seconds, I believed in love.
+
+Then she asked me if Rahul was coming to school tomorrow.
+
+My heart has officially become a government museum.
+
+After school, we played cricket. I got out on the first ball. My friends called me a national-level failure.
+
+Came home and watched TV, but Dad changed the channel to the news. Apparently, even entertainment is a privilege in this house.
+
+I miss the days when my biggest problem was losing my pencil.
+
+---
+
+## DAY 3 - WEDNESDAY
+
+Dear Diary,
+
+Disaster!
+
+Our teacher announced a surprise test. I stared at the question paper for 30 minutes. The paper stared back.
+
+I think we both understood that this relationship wasn't going anywhere.
+
+My best friend copied my answers. Unfortunately, my answers were wrong too. Now we are both academically unemployed.
+
+After school, I went to the STD booth to call my cousin. Spent five rupees just to say hello.
+
+Internet might be invented someday, but hopefully parents won't find a way to control that too.
+
+---
+
+## DAY 4 - THURSDAY
+
+Dear Diary,
+
+Dad found my secret love letter today.
+
+I had written, "Dear Priya, I think you're beautiful."
+
+Dad read it aloud at dinner.
+
+Mom laughed. My younger sister started singing romantic songs. I wanted the ground to swallow me.
+
+Dad said, "First get a job, then think about girls."
+
+Sir, I'm 15. Should I also start paying electricity bills?
+
+To make things worse, Priya didn't come to school today.
+
+Maybe she has migrated to another country after hearing about my letter.
+
+---
+
+## DAY 5 - FRIDAY
+
+Dear Diary,
+
+Finally, Friday!
+
+My friends and I spent the afternoon playing cricket, eating one-rupee ice candies and discussing our extremely unrealistic future plans.
+
+Rahul wants to become a millionaire. Amit wants to become a film star. I just want to pass Mathematics.
+
+Recorded my favourite song from the radio onto a cassette, but the RJ started talking in the middle. Another dream destroyed.
+
+Sometimes I wonder what life will look like in 2026.
+
+Maybe flying cars, robots, and everyone living happily.
+
+Hopefully, students won't have exams.
+
+Anyway, time to sleep. Tomorrow is Saturday, and for once, life doesn't completely hate me.
+
+P.S. Dear God, if you're reading this, please cancel Monday.
 `;
 
 const SCHOOL = `THE FUTURE OF COMPUTERS
@@ -312,6 +417,7 @@ const SPECS: SeedSpec[] = [
   { id: SEED_IDS.checklist, parentId: SEED_IDS.docs, name: 'y2k_checklist.txt', kind: 'file', text: CHECKLIST, createdAt: '1999-12-31T21:47:00', readOnly: true },
   { id: SEED_IDS.school, parentId: SEED_IDS.docs, name: 'school_project.txt', kind: 'file', text: SCHOOL, createdAt: '1999-11-14T20:12:00' },
   { id: SEED_IDS.journal, parentId: SEED_IDS.docs, name: 'journal.txt', kind: 'file', text: JOURNAL, createdAt: '1999-12-31T23:58:00' },
+  { id: SEED_IDS.diary1995, parentId: SEED_IDS.docs, name: 'my_daily_routine_1995.txt', kind: 'file', text: DIARY_1995, createdAt: '1998-08-15T20:30:00' },
   { id: SEED_IDS.shopping, parentId: SEED_IDS.docs, name: 'shopping_list.txt', kind: 'file', text: SHOPPING, createdAt: '1999-12-28T17:03:00' },
   { id: SEED_IDS.finalFinal, parentId: SEED_IDS.docs, name: 'final_final_REAL_FINAL.txt', kind: 'file', text: FINAL_FINAL, createdAt: '1999-12-03T23:12:00', deleted: true },
   { id: SEED_IDS.unsent, parentId: SEED_IDS.letters, name: 'unsent_1999.txt', kind: 'file', text: UNSENT, createdAt: '1999-12-31T23:41:00', readOnly: true },

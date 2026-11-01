@@ -216,3 +216,28 @@ describe('IndexedDB adapter (fake-indexeddb)', () => {
     expect(b.storageWarning).toMatch(/lost/);
   });
 });
+
+describe('seed v2: daily routine diary', () => {
+  it('is in My Documents with the exact text', async () => {
+    const { vfs } = await makeVfs();
+    const id = vfs.resolvePath('C:\\My Documents\\my_daily_routine_1995.txt');
+    expect(id).toEqual({ ok: true, value: SEED_IDS.diary1995 });
+    const t = vfs.readText(SEED_IDS.diary1995);
+    expect(t.ok && t.value.text.startsWith('MY SECRET DIARY\nYEAR: 1995\nAGE: 15')).toBe(true);
+    expect(t.ok && t.value.text.trimEnd().endsWith('please cancel Monday.')).toBe(true);
+    expect(t.ok && t.value.node.readOnly).toBeFalsy();
+  });
+
+  it('upgrading a v1 disk adds the diary without overwriting user edits', async () => {
+    const adapter = new MemoryAdapter();
+    const seed = buildSeed();
+    const v1Nodes = seed.nodes.filter((n) => n.id !== SEED_IDS.diary1995);
+    const v1Contents = seed.contents.filter((c) => c.nodeId !== SEED_IDS.diary1995).map((c) => (c.nodeId === SEED_IDS.school ? { ...c, content: 'user edit' } : c));
+    await adapter.commitFs({ putNodes: v1Nodes, putContents: v1Contents, seedVersion: 1 });
+    await seedIfNeeded(adapter);
+    const snap = await adapter.load();
+    expect(snap.seedVersion).toBe(2);
+    expect(snap.nodes.some((n) => n.id === SEED_IDS.diary1995)).toBe(true);
+    expect(snap.contents.find((c) => c.nodeId === SEED_IDS.school)?.content).toBe('user edit');
+  });
+});
