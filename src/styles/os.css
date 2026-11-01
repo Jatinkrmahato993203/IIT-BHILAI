@@ -84,6 +84,13 @@ body { background: #000; overflow: hidden; font-family: var(--font-ui); -webkit-
 
 /* ---------- Desktop ---------- */
 .desktop { position: fixed; inset: 0; background: var(--desktop-teal); overflow: hidden; user-select: none; }
+/* Default wallpaper: the whole picture stays visible above the taskbar; the side bands use the
+   sampled wall colour so the edges blend on any aspect ratio. Teal shows while it loads. */
+.desktop[data-wallpaper='couch'] { background: #dc577a; }
+.desktop[data-wallpaper='couch']::before {
+  content: ''; position: absolute; inset: 0 0 var(--taskbar-h) 0; pointer-events: none;
+  background: url('../assets/wallpapers/couch_1998.jpg') center / contain no-repeat;
+}
 .desktop[data-wallpaper='clouds'] { background: linear-gradient(#5d9cec 0%, #9fc7f5 60%, #e1efff 100%); }
 .desktop[data-wallpaper='night'] { background: radial-gradient(circle at 70% 20%, #2a3a7a, #0b0f2a 70%); }
 .desktop[data-wallpaper='floppy'] {

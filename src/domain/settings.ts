@@ -1,4 +1,4 @@
-export type Wallpaper = 'teal' | 'clouds' | 'night' | 'floppy';
+export type Wallpaper = 'couch' | 'teal' | 'clouds' | 'night' | 'floppy';
 export type MotionPref = 'system' | 'reduce' | 'full';
 export type Settings = {
   sound: boolean;
@@ -13,12 +13,12 @@ export const defaultSettings = (): Settings => ({
   sound: false,
   motion: 'system',
   textScale: 100,
-  wallpaper: 'teal',
+  wallpaper: 'couch',
   highContrastFocus: false,
   skipBootAnimation: false,
 });
 
-const WALLPAPERS: Wallpaper[] = ['teal', 'clouds', 'night', 'floppy'];
+const WALLPAPERS: Wallpaper[] = ['couch', 'teal', 'clouds', 'night', 'floppy'];
 
 export function sanitizeSettings(raw: unknown): Settings {
   const d = defaultSettings();

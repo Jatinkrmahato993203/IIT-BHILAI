@@ -1,5 +1,5 @@
 import { progressOf } from '../../domain/story/engine';
-import type { MotionPref, Wallpaper } from '../../domain/settings';
+import { defaultSettings, type MotionPref, type Wallpaper } from '../../domain/settings';
 import { useOs } from '../../os/OsContext';
 import type { AppProps } from '../../shell/appRegistry';
 
@@ -17,6 +17,7 @@ export default function ControlPanel(_props: AppProps) {
         <div className="field-row-stacked">
           <label htmlFor="cp-wall">Wallpaper</label>
           <select id="cp-wall" data-autofocus="true" value={s.wallpaper} onChange={(e) => os.updateSettings({ wallpaper: e.target.value as Wallpaper })}>
+            <option value="couch">The Couch (default)</option>
             <option value="teal">(None) — Teal</option>
             <option value="clouds">Sky</option>
             <option value="night">Midnight</option>
@@ -83,7 +84,7 @@ export default function ControlPanel(_props: AppProps) {
               if ((await confirm('Reset everything', ['Erase all files, progress and settings and start fresh?', 'This cannot be undone.'], 'Reset everything')) === 'yes') {
                 await os.resetFilesystem();
                 await os.resetStory();
-                os.updateSettings({ sound: false, motion: 'system', textScale: 100, wallpaper: 'teal', highContrastFocus: false, skipBootAnimation: false });
+                os.updateSettings(defaultSettings());
               }
             }}
           >

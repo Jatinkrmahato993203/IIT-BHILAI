@@ -71,3 +71,12 @@ describe('story engine', () => {
     expect(nextHint(run([...STORY_EVENTS]), 0).title).toBe('Mystery solved');
   });
 });
+
+import { defaultSettings, sanitizeSettings } from '../domain/settings';
+describe('settings', () => {
+  it('defaults to the couch wallpaper and keeps a stored choice', () => {
+    expect(defaultSettings().wallpaper).toBe('couch');
+    expect(sanitizeSettings({ wallpaper: 'teal' }).wallpaper).toBe('teal');
+    expect(sanitizeSettings({ wallpaper: 'javascript:alert(1)' }).wallpaper).toBe('couch');
+  });
+});
