@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState, type ReactNode } from 'react';
 import { SEED_IDS, SEED_LAUNCHERS } from '../content/seed';
 import { extensionOf } from '../domain/fs/validation';
-import type { NodeId } from '../domain/fs/types';
+import { isImage, type NodeId } from '../domain/fs/types';
 import { sanitizeSettings, type Settings } from '../domain/settings';
 import { applyEvent, has, initialStory, progressOf, sanitizeStory, type StoryEvent, type StoryState } from '../domain/story/engine';
 import { seedIfNeeded, type Boot } from '../persistence/bootstrap';
@@ -252,7 +252,7 @@ export function OsProvider({ boot, hooks, children, render }: { boot: Boot; hook
         openApp('notepad', { fileId: id });
         return;
       }
-      if (node.mimeType === 'image/svg') {
+      if (isImage(node.mimeType)) {
         openApp('imageviewer', { fileId: id });
         return;
       }

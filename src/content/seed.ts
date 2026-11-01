@@ -6,8 +6,11 @@ import type { AppId } from '../shell/appIds';
  * Canon: owner Aarav, files dated Aug 1998 – 31 Dec 1999 23:58. Nothing is dated 2000 or later.
  * All text is original fiction written for this project.
  */
-/** v2 adds my_daily_routine_1995.txt. Bumping makes existing browsers receive it additively. */
-export const SEED_VERSION = 2;
+/**
+ * v2 adds my_daily_routine_1995.txt; v3 adds My Documents\meme. Bumping makes existing
+ * browsers receive new seed files additively (user edits are never overwritten).
+ */
+export const SEED_VERSION = 3;
 
 export const SEED_IDS = {
   root: ROOT_ID,
@@ -28,6 +31,8 @@ export const SEED_IDS = {
   grandma: 'seed:grandma',
   shopping: 'seed:shopping',
   diary1995: 'seed:diary-1995',
+  meme: 'seed:meme',
+  memeGandhi: 'seed:meme-gandhi',
   syslog: 'seed:syslog',
   winini: 'seed:winini',
   finalFinal: 'seed:final-final',
@@ -417,6 +422,8 @@ const SPECS: SeedSpec[] = [
   { id: SEED_IDS.checklist, parentId: SEED_IDS.docs, name: 'y2k_checklist.txt', kind: 'file', text: CHECKLIST, createdAt: '1999-12-31T21:47:00', readOnly: true },
   { id: SEED_IDS.school, parentId: SEED_IDS.docs, name: 'school_project.txt', kind: 'file', text: SCHOOL, createdAt: '1999-11-14T20:12:00' },
   { id: SEED_IDS.journal, parentId: SEED_IDS.docs, name: 'journal.txt', kind: 'file', text: JOURNAL, createdAt: '1999-12-31T23:58:00' },
+  { id: SEED_IDS.meme, parentId: SEED_IDS.docs, name: 'meme', kind: 'folder', createdAt: '1999-11-20T19:15:00' },
+  { id: SEED_IDS.memeGandhi, parentId: SEED_IDS.meme, name: 'satyagraha_vs_56k.jpg', kind: 'file', mimeType: 'image/jpeg', assetId: 'meme-gandhi', createdAt: '1999-11-20T19:16:00' },
   { id: SEED_IDS.diary1995, parentId: SEED_IDS.docs, name: 'my_daily_routine_1995.txt', kind: 'file', text: DIARY_1995, createdAt: '1998-08-15T20:30:00' },
   { id: SEED_IDS.shopping, parentId: SEED_IDS.docs, name: 'shopping_list.txt', kind: 'file', text: SHOPPING, createdAt: '1999-12-28T17:03:00' },
   { id: SEED_IDS.finalFinal, parentId: SEED_IDS.docs, name: 'final_final_REAL_FINAL.txt', kind: 'file', text: FINAL_FINAL, createdAt: '1999-12-03T23:12:00', deleted: true },
@@ -448,6 +455,7 @@ const FAKE_BINARY_SIZES: Record<string, number> = {
   'seed:exe-command': 93890,
   'seed:summer': 38912,
   'seed:room': 30720,
+  'seed:meme-gandhi': 226497,
 };
 
 export function buildSeed(): { nodes: FsNode[]; contents: TextContent[] } {

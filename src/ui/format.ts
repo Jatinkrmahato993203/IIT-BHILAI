@@ -1,4 +1,4 @@
-import type { FsNode } from '../domain/fs/types';
+import { isImage, type FsNode } from '../domain/fs/types';
 import { extensionOf } from '../domain/fs/validation';
 import type { IconName } from './icons';
 import { SEED_LAUNCHERS } from '../content/seed';
@@ -27,6 +27,7 @@ export function typeLabel(n: FsNode): string {
   const ext = extensionOf(n.name);
   if (n.mimeType === 'text/plain') return ext === 'ini' ? 'Configuration Settings' : 'Text Document';
   if (n.mimeType === 'image/svg') return 'Bitmap Image';
+  if (n.mimeType === 'image/jpeg') return 'JPEG Image';
   return ext ? `${ext.toUpperCase()} File` : 'File';
 }
 
@@ -34,7 +35,7 @@ export function iconFor(n: FsNode): IconName {
   if (n.kind === 'drive') return 'drive';
   if (n.kind === 'folder') return n.hidden ? 'lock' : 'folder';
   if (SEED_LAUNCHERS[n.id]) return n.id === 'seed:exe-vault' ? 'vault' : 'exe';
-  if (n.mimeType === 'image/svg') return 'image';
+  if (isImage(n.mimeType)) return 'image';
   if (n.mimeType === 'text/plain') return 'document';
   return 'exe';
 }

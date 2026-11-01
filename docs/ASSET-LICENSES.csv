@@ -6,3 +6,4 @@ src/ui/sound.ts,n/a,The Last Login team,Project-original,n/a,yes,"Sounds are syn
 public/favicon.svg,n/a,The Last Login team,Project-original,n/a,yes,
 src/content/seed.ts (all story text),n/a,The Last Login team,Project-original,n/a,yes,"Fictional characters (Aarav, Riya, Kabir); e-mail addresses use the reserved .example TLD"
 System fonts (Tahoma/Arial/Courier New),n/a,OS vendors,Not shipped,n/a,n/a,"Referenced by name in CSS only; no font files are bundled"
+src/assets/memes/satyagraha_vs_56k.jpg,supplied by project owner,unknown,unknown,unknown,no,"User-supplied cartoon (likely AI-generated). Depicts Mahatma Gandhi and includes Internet Explorer and Netscape logos. Re-encoded to 1000px, metadata stripped. CONFIRM origin/rights before public submission."

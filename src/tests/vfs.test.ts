@@ -4,7 +4,7 @@ import { ROOT_ID } from '../domain/fs/types';
 import { MemoryAdapter } from '../persistence/memoryAdapter';
 import { IdbAdapter } from '../persistence/idbAdapter';
 import { bootstrap, seedIfNeeded } from '../persistence/bootstrap';
-import { buildSeed, SEED_IDS } from '../content/seed';
+import { buildSeed, SEED_IDS, SEED_VERSION } from '../content/seed';
 
 async function makeVfs() {
   const adapter = new MemoryAdapter();
@@ -236,8 +236,18 @@ describe('seed v2: daily routine diary', () => {
     await adapter.commitFs({ putNodes: v1Nodes, putContents: v1Contents, seedVersion: 1 });
     await seedIfNeeded(adapter);
     const snap = await adapter.load();
-    expect(snap.seedVersion).toBe(2);
+    expect(snap.seedVersion).toBe(SEED_VERSION);
     expect(snap.nodes.some((n) => n.id === SEED_IDS.diary1995)).toBe(true);
     expect(snap.contents.find((c) => c.nodeId === SEED_IDS.school)?.content).toBe('user edit');
+  });
+});
+
+describe('seed v3: meme folder', () => {
+  it('contains the image, which opens as an image (not text)', async () => {
+    const { vfs } = await makeVfs();
+    expect(vfs.resolvePath('C:\\My Documents\\meme\\satyagraha_vs_56k.jpg')).toEqual({ ok: true, value: SEED_IDS.memeGandhi });
+    const r = vfs.readText(SEED_IDS.memeGandhi);
+    expect(r.ok).toBe(false);
+    expect(vfs.getNode(SEED_IDS.memeGandhi)?.mimeType).toBe('image/jpeg');
   });
 });

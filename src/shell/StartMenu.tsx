@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { SEED_IDS } from '../content/seed';
 import { has } from '../domain/story/engine';
+import { isImage } from '../domain/fs/types';
 import { useOs } from '../os/OsContext';
 import { Icon, type IconName } from '../ui/icons';
 
@@ -19,7 +20,7 @@ export function StartMenu({ onClose }: { onClose: (returnFocus: boolean) => void
     .map((id) => os.vfs.getNode(id))
     .filter((n): n is NonNullable<typeof n> => !!n && os.vfs.isAccessible(n.id))
     .slice(0, 6)
-    .map((n) => ({ id: `recent-${n.id}`, label: n.name, icon: n.mimeType === 'image/svg' ? 'image' : 'document', action: run(() => os.openNode(n.id)) }));
+    .map((n) => ({ id: `recent-${n.id}`, label: n.name, icon: isImage(n.mimeType) ? 'image' : 'document', action: run(() => os.openNode(n.id)) }));
 
   const items: Item[] = [
     {

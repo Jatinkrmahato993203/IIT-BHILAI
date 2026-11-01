@@ -1,6 +1,7 @@
 export type NodeId = string;
 export type NodeKind = 'drive' | 'folder' | 'file';
-export type MimeType = 'text/plain' | 'image/svg' | 'application/octet-stream';
+export type MimeType = 'text/plain' | 'image/svg' | 'image/jpeg' | 'application/octet-stream';
+export const isImage = (m: MimeType | undefined) => m === 'image/svg' || m === 'image/jpeg';
 
 export type FsNode = {
   id: NodeId;

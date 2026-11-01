@@ -1,9 +1,15 @@
 import { useEffect, type ReactElement } from 'react';
 import { useOs, useVfsVersion } from '../../os/OsContext';
 import type { AppProps } from '../../shell/appRegistry';
+import memeGandhi from '../../assets/memes/satyagraha_vs_56k.jpg';
 
 /** Trusted registry of original illustrations. Image files reference these by assetId only. */
 const ASSETS: Record<string, { alt: string; caption: string; art: ReactElement }> = {
+  'meme-gandhi': {
+    alt: 'Cartoon of Mahatma Gandhi smiling patiently at a beige 1990s computer whose screen reads "Page loading... 15%", under a neon GeoCities-style banner: "Satyagraha against 56K dial-up: supreme patience is waiting for a webpage to load".',
+    caption: 'satyagraha_vs_56k — forwarded 47 times. Still loading.',
+    art: <img src={memeGandhi} alt="" className="image-raster" draggable={false} />,
+  },
   summer: {
     alt: 'Pixel-art beach at sunset: an orange sun over the sea, a red kite with "1999" written on it, and two small figures on the sand.',
     caption: 'summer_1999 — Juhu beach. Riya said the kite was "kind of cool". (It was.)',
