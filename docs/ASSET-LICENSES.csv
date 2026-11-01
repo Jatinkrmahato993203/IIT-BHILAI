@@ -1,0 +1,8 @@
+file,source_url,author,licence,attribution_text,permission_verified,notes
+src/vendor/98.css,https://github.com/jdan/98.css,Jordan Scales,MIT,"98.css (c) 2020 Jordan Scales, MIT licence",yes,"Vendored v0.1.21 with the bundled pixel-font @font-face rules removed (font provenance undocumented upstream); licence text kept in the file header"
+src/ui/icons.tsx,n/a,The Last Login team,Project-original,n/a,yes,"Hand-drawn pixel SVG icons inspired by the era; not Microsoft artwork"
+src/apps/imageviewer/ImageViewer.tsx (summer_1999.bmp; my_setup.bmp),n/a,The Last Login team,Project-original,n/a,yes,"Inline SVG illustrations; no photographs of real people"
+src/ui/sound.ts,n/a,The Last Login team,Project-original,n/a,yes,"Sounds are synthesized at runtime with the Web Audio API; no audio files are shipped"
+public/favicon.svg,n/a,The Last Login team,Project-original,n/a,yes,
+src/content/seed.ts (all story text),n/a,The Last Login team,Project-original,n/a,yes,"Fictional characters (Aarav, Riya, Kabir); e-mail addresses use the reserved .example TLD"
+System fonts (Tahoma/Arial/Courier New),n/a,OS vendors,Not shipped,n/a,n/a,"Referenced by name in CSS only; no font files are bundled"

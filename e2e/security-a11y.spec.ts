@@ -95,3 +95,19 @@ test('keyboard Move mode moves a window and Escape reverts', async ({ page }) =>
   const reverted = await np.boundingBox();
   expect(Math.round(reverted!.y)).toBe(Math.round(after!.y));
 });
+
+test('production CSP and security headers are served and nothing is blocked', async ({ page }) => {
+  const violations: string[] = [];
+  page.on('console', (m) => {
+    if (/Content Security Policy|Refused to/i.test(m.text())) violations.push(m.text());
+  });
+  const res = await page.goto('/');
+  const h = res!.headers();
+  expect(h['content-security-policy']).toContain("frame-ancestors 'none'");
+  expect(h['x-content-type-options']).toBe('nosniff');
+  await boot(page);
+  await openDesktopIcon(page, 'My Documents');
+  await openDesktopIcon(page, 'The Internet');
+  await win(page, /The Internet/).getByRole('button', { name: 'Skip' }).click();
+  expect(violations).toEqual([]);
+});

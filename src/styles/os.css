@@ -276,7 +276,7 @@ kbd { border: 1px solid #808080; padding: 0 3px; background: #eee; }
 .tray-icon:focus-visible, .tray-clock:focus-visible { outline: 1px dotted #000; }
 .tray-clock { all: unset; padding: 0 6px; height: 24px; display: inline-flex; align-items: center; cursor: default; white-space: nowrap; }
 .balloon { position: absolute; right: 8px; bottom: calc(var(--taskbar-h) + 6px); background: #ffffe1; border: 1px solid #000; padding: 6px 10px; display: flex; gap: 6px; align-items: center; box-shadow: 2px 2px 0 rgba(0,0,0,.4); animation: pop 0.2s ease-out; }
-@keyframes pop { from { transform: translateY(6px); opacity: 0; } }
+@keyframes pop { from { transform: translateY(6px); } }
 
 /* Start menu */
 .start-menu { position: absolute; bottom: calc(100% + 1px); left: 0; display: flex; padding: 2px; z-index: 9500; }
