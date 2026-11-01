@@ -26,8 +26,11 @@ export class VfsService {
   private readonly adapter: StorageAdapter;
   private readonly newId: NewId;
   private readonly now: Clock;
-  /** Called after every successful commit with the affected ids (used for cross-tab sync). */
-  onCommitted: ((ids: NodeId[]) => void) | null = null;
+  private onCommitted: ((ids: NodeId[]) => void) | null = null;
+  /** Register a callback for successful commits (used for cross-tab sync). */
+  setCommitListener(fn: ((ids: NodeId[]) => void) | null) {
+    this.onCommitted = fn;
+  }
 
   constructor(adapter: StorageAdapter, opts: { newId?: NewId; now?: Clock } = {}) {
     this.adapter = adapter;

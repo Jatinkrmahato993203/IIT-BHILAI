@@ -95,6 +95,13 @@ export type Hint = { title: string; text: string };
 /** Progressive, non-spoiling hints for the next missing milestone. `level` 0..2 */
 export function nextHint(s: StoryState, level: number): Hint {
   const lv = Math.max(0, Math.min(2, level));
+  if (has(s, 'file.opened:survival-plan')) {
+    const left = STORY_EVENTS.filter((e) => !has(s, e)).length;
+    return {
+      title: 'Mystery solved',
+      text: `You reached the ending${left ? ` (and skipped ${left} clue${left > 1 ? 's' : ''} — they are still worth reading)` : ''}. Try the Recycle Bin, MS-DOS Prompt (type ver a few times) and The Internet for more secrets.`,
+    };
+  }
   const missing = STORY_EVENTS.find((e) => !has(s, e));
   const table: Record<StoryEvent, [string, string, string]> = {
     'file.opened:read-me': [

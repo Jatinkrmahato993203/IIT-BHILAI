@@ -54,12 +54,13 @@ Actually just play Pinball or something.
   _______________________________
  |  ___________________________  |
  | |                           | |
- | |   SYSADMIN-99 IS WATCHING  | |
- | |   (it is not. I made it    | |
- | |    in QBasic. - A)         | |
+ | |  SYSADMIN-99 IS WATCHING  | |
+ | |  (it is not. I made it    | |
+ | |   in QBasic. - A)         | |
  | |___________________________| |
  |_______________________________|
-      _[_______]_
+          _[_______]_
+
   P.S. the password is NOT "password". I'm not stupid.
 `;
 

@@ -34,6 +34,8 @@ export const TITLEBAR_HEIGHT = 22;
 /** Keep at least this many px of the title bar on screen horizontally. */
 export const MIN_VISIBLE = 64;
 export const MAX_WINDOWS = 24;
+export const CASCADE_STEP = 28;
+const CASCADE_ORIGIN = { x: 132, y: 24 };
 
 export type OpenSpec = {
   id: string;
@@ -143,12 +145,14 @@ export function windowReducer(s: WindowState, a: WindowAction): WindowState {
     case 'OPEN': {
       if (s.windows.some((w) => w.id === a.spec.id)) return focus(s, a.spec.id);
       if (s.windows.length >= MAX_WINDOWS) return s;
+      // Cascade from a fixed origin (like Windows) so each new title bar sits below the
+      // previous one and every window's title bar and controls stay visible and clickable.
       const area = usableArea(s.viewport);
-      const step = (s.openCount % 8) * 24;
+      const step = (s.openCount % 8) * CASCADE_STEP;
       const width = Math.min(a.spec.width, area.width);
       const height = Math.min(a.spec.height, area.height);
-      const baseX = Math.max(0, Math.round((area.width - width) / 2) - 96);
-      const baseY = Math.max(0, Math.round((area.height - height) / 2) - 72);
+      const baseX = Math.max(0, Math.min(CASCADE_ORIGIN.x, area.width - width - 7 * CASCADE_STEP));
+      const baseY = Math.max(0, Math.min(CASCADE_ORIGIN.y, area.height - height - 7 * CASCADE_STEP));
       const min = { width: a.spec.minWidth ?? 160, height: a.spec.minHeight ?? 100 };
       const bounds = fitInside({ x: baseX + step, y: baseY + step, width, height }, s.viewport, min);
       const rec: WindowRecord = {

@@ -15,7 +15,10 @@ interface LastLoginDB extends DBSchema {
 
 export class IdbAdapter implements StorageAdapter {
   readonly kind = 'indexeddb' as const;
-  private constructor(private db: IDBPDatabase<LastLoginDB>) {}
+  private readonly db: IDBPDatabase<LastLoginDB>;
+  private constructor(db: IDBPDatabase<LastLoginDB>) {
+    this.db = db;
+  }
 
   /** Opens the database, failing (rather than hanging) after `timeoutMs`. */
   static async open(timeoutMs = 4000): Promise<IdbAdapter> {
